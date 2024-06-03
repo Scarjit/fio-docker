@@ -4,4 +4,4 @@ For the `fio` source code and GPLv2 license, please visit: https://github.com/ax
 
 
 To run execute:
-`docker run --rm --privileged --device /dev/sda fio-auto-tests`
+`docker run --rm --privileged --device /dev/sda ghcr.io/scarjit/fio-docker`
