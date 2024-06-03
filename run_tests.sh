@@ -31,7 +31,8 @@ log_system_info() {
     echo "" | tee -a "$log_file"
 
     echo "Swap Info:" | tee -a "$log_file"
-    swapon --show | tee -a "$log_file"
+    # This might fail, therefore we need to catch the error
+    swapon -a 2>/dev/null || echo "No swap partition found." | tee -a "$log_file"
     echo "" | tee -a "$log_file"
 }
 
