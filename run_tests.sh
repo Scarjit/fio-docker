@@ -36,6 +36,9 @@ log_system_info() {
     echo "" | tee -a "$log_file"
 }
 
+# Log system information
+log_system_info
+
 # Write test
 echo "Running write test..." | tee -a "$log_file"
 fio --name=write_test --ioengine=libaio --iodepth=1 --rw=write --bs=1M --direct=1 --size=1G --numjobs=1 --runtime=60 --group_reporting | tee -a "$log_file"
@@ -67,6 +70,3 @@ sysbench cpu --threads=1 --cpu-max-prime=20000 run | tee -a "$log_file"
 # Memory benchmark
 echo "Running memory benchmark..." | tee -a "$log_file"
 sysbench memory run | tee -a "$log_file"
-
-# Log final system information
-log_system_info
