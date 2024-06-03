@@ -61,7 +61,11 @@ fio --name=iops_test --ioengine=libaio --iodepth=64 --rw=randread --bs=4k --dire
 
 # CPU benchmark
 echo "Running CPU benchmark..." | tee -a "$log_file"
-sysbench cpu --cpu-max-prime=20000 run | tee -a "$log_file"
+sysbench cpu --threads=1 --cpu-max-prime=20000 run | tee -a "$log_file"
+
+# Memory benchmark
+echo "Running memory benchmark..." | tee -a "$log_file"
+sysbench memory run | tee -a "$log_file"
 
 # Log final system information
 log_system_info
