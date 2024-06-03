@@ -1,0 +1,26 @@
+name: Build docker images
+
+on:
+  push:
+
+jobs:
+  build-docker:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Explicitly set, even though this is default
+          fetch-depth: 1
+          # Explicitly set, even though this is default
+          lfs: false
+          # Explicitly set, even though this is default
+          submodules: false
+          clean: false
+
+      - name: Build and publish a Docker image for ${{ github.repository }}
+        uses: macbre/push-to-ghcr@master
+        with:
+          image_name: ${{ github.repository }}  # it will be lowercased internally
+          github_token: ${{ secrets.GITHUB_TOKEN }}
