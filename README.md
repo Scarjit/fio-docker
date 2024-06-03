@@ -6,5 +6,6 @@ For the `fio` source code and GPLv2 license, please visit: https://github.com/ax
 To run execute:
 ```
 docker pull ghcr.io/scarjit/fio-docker:latest
-docker run --rm --privileged --device /dev/sda ghcr.io/scarjit/fio-docker:latest
+docker run --rm --privileged --device /dev/sda -v /tmp:/mnt/logs ghcr.io/scarjit/fio-docker:latest
+
 ```
