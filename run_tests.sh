@@ -1,13 +1,16 @@
 #!/bin/sh
 
+# Define the log directory (this will be mapped to the host)
+log_dir="/mnt/logs"
+
 # Create the log directory if it doesn't exist
-mkdir -p /tmp/disk-test
+mkdir -p "$log_dir"
 
 # Get the current time
 current_time=$(date "+%Y-%m-%d_%H-%M-%S")
 
 # Define the log file path
-log_file="/tmp/disk-test/${current_time}.log"
+log_file="${log_dir}/${current_time}.log"
 
 # Function to log minimal system information
 log_system_info() {
