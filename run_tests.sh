@@ -33,4 +33,35 @@ fio --name=seqwrite_test --ioengine=libaio --iodepth=1 --rw=write --bs=1M --dire
 echo "Running IOPS test..." | tee -a "$log_file"
 fio --name=iops_test --ioengine=libaio --iodepth=64 --rw=randread --bs=4k --direct=1 --size=1G --numjobs=1 --runtime=60 --group_reporting | tee -a "$log_file"
 
-echo "All tests completed. Log file saved at $log_file"
+# Function to log system information
+log_system_info() {
+    echo "System Information at $(date)" | tee -a "$log_file"
+    echo "---------------------------------" | tee -a "$log_file"
+
+    echo "CPU Info:" | tee -a "$log_file"
+    cat /proc/cpuinfo | tee -a "$log_file"
+    echo "" | tee -a "$log_file"
+
+    echo "Memory Info:" | tee -a "$log_file"
+    cat /proc/meminfo | tee -a "$log_file"
+    echo "" | tee -a "$log_file"
+
+    echo "Disk Info:" | tee -a "$log_file"
+    lsblk | tee -a "$log_file"
+    echo "" | tee -a "$log_file"
+
+    echo "Filesystem Info:" | tee -a "$log_file"
+    df -h | tee -a "$log_file"
+    echo "" | tee -a "$log_file"
+
+    echo "Swap Info:" | tee -a "$log_file"
+    swapon --show | tee -a "$log_file"
+    echo "" | tee -a "$log_file"
+
+    echo "CPU Performance:" | tee -a "$log_file"
+    lscpu | grep 'Model name\|CPU MHz\|Socket(s)\|Core(s) per socket\|Thread(s) per core\|CPU(s)' | tee -a "$log_file"
+    echo "" | tee -a "$log_file"
+}
+
+# Log system information at the end
+log_system_info
