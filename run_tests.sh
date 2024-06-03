@@ -18,6 +18,10 @@ log_system_info() {
     lscpu | grep 'Model name\|CPU MHz\|Socket(s)\|Core(s) per socket\|Thread(s) per core\|CPU(s)' | tee -a "$log_file"
     echo "" | tee -a "$log_file"
 
+    echo "Full CPU Info:" | tee -a "$log_file"
+    lscpu | tee -a "$log_file"
+    echo "" | tee -a "$log_file"
+
     echo "Memory Info:" | tee -a "$log_file"
     free -h | tee -a "$log_file"
     echo "" | tee -a "$log_file"
